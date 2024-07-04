@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mobile Recommender System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: gray;
+        }
+        p{
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: black;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: red;
+        }
+        h2{
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: red;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: red;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .recommendations {
+            margin-top: 20px;
+        }
+        .recommendations h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .recommendation-list {
+            display: flex;
+            justify-content: space-around;
+        }
+        .recommendation-item {
+            width: 18%;
+            text-align: center;
+        }
+        .recommendation-item img {
+            width: 100%;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mobile Phone Recommender System</h1>
+        <form method="POST" action="/recommend">
+            <div class="form-group">
+                <label for="phone">Select phone:</label>
+                <select id="phone" name="phone">
+                    {% for item in phone_names %}
+                        <option value="{{ item }}">{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Get Recommendation</button>
+            </div>
+        </form>
+        {% if recommendations %}
+        <div class="recommendations">
+            <h2>Recommended phones for {{ name_of_phone }}</h2>
+            <div class="recommendation-list">
+                {% for ph_name,ph_img in recommendations.items() %}
+                <div class="recommendation-item">
+                    <img src="{{ ph_img }}" alt= "{{ ph_name }}">
+                    <p> "{{ ph_name }}" </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
