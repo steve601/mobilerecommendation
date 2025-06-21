@@ -4,3 +4,4 @@ pandas==2.2.2
 numpy==1.23.5
 seaborn==0.13.2
 matplotlib==3.9.0
+gunicorn
